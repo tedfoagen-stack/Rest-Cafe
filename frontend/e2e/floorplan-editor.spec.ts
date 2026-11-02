@@ -47,9 +47,9 @@ test.beforeEach(async ({ request }) => {
 
 async function login(page: import('@playwright/test').Page) {
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill(EMAIL);
-  await page.getByLabel('Password').fill(PASSWORD);
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill(EMAIL);
+  await page.locator('#password').fill(PASSWORD);
+  await page.locator('button[type="submit"]').click();
   await page.goto(`${BASE}/tables`);
   await expect(page.getByRole('heading', { name: 'Tables' })).toBeVisible();
   // List is the default view — switch to the floor plan second view first.

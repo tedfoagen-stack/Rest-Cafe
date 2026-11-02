@@ -11,9 +11,9 @@ function escapeRegExp(value: string): string {
 
 async function loginAs(page: Page, email: string) {
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill(email);
-  await page.getByLabel('Password').fill(E2E_PASSWORD);
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill(email);
+  await page.locator('#password').fill(E2E_PASSWORD);
+  await page.locator('button[type="submit"]').click();
   // A server lands on orders, everyone else on the till.
   await page.waitForURL(/\/(pos|orders)/, { timeout: 20000 });
 }

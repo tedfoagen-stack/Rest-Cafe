@@ -139,9 +139,9 @@ test.describe('Table Move UI Live Validation', () => {
 
       // Login via UI
       await page.goto(`${BASE}/auth/login`);
-      await page.getByLabel('Email').fill('manager@flo.local');
-      await page.getByLabel('Password').fill('E2ePass123!');
-      await page.getByRole('button', { name: 'Sign In' }).click();
+      await page.locator('#email').fill('manager@flo.local');
+      await page.locator('#password').fill('E2ePass123!');
+      await page.locator('button[type="submit"]').click();
       await page.waitForURL((url) => !url.pathname.includes('/auth/login'), { timeout: 15_000 });
 
       // ─────────────────────────────────────────────────────────────────────────

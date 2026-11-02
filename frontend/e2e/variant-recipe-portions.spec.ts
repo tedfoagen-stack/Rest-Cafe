@@ -119,9 +119,9 @@ test.describe('variant recipe portions', () => {
     // The tenant language is pinned before login so the editor labels are stable.
     await setLanguage(page, 'en');
     await page.goto(`${BASE}/auth/login`);
-    await page.getByLabel('Email').fill('manager@flo.local');
-    await page.getByLabel('Password').fill(E2E_PASSWORD);
-    await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.locator('#email').fill('manager@flo.local');
+    await page.locator('#password').fill(E2E_PASSWORD);
+    await page.locator('button[type="submit"]').click();
     await page.waitForURL(/\/(pos|orders)/, { timeout: 20000 });
 
     await openProductEditor(page, productName);
@@ -214,9 +214,9 @@ test.describe('variant recipe portions', () => {
 
     await setLanguage(page, 'en');
     await page.goto(`${BASE}/auth/login`);
-    await page.getByLabel('Email').fill('manager@flo.local');
-    await page.getByLabel('Password').fill(E2E_PASSWORD);
-    await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.locator('#email').fill('manager@flo.local');
+    await page.locator('#password').fill(E2E_PASSWORD);
+    await page.locator('button[type="submit"]').click();
     await page.waitForURL(/\/(pos|orders)/, { timeout: 20000 });
 
     await openProductEditor(page, productName);

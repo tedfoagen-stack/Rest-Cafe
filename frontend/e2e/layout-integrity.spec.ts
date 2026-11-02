@@ -66,7 +66,7 @@ test('LAN/browser sidebar pins to the viewport top with zero title-bar markup on
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const sidebar = page.locator('[data-slot="sidebar-container"]');
   await expect(sidebar).toBeVisible();
@@ -138,7 +138,7 @@ test('sidebar theme toggle button does not clip horizontally or vertically acros
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill(E2E_PASSWORD);
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const locales = [
     {
@@ -307,7 +307,7 @@ test('sidebar renders one localized primary navigation landmark wrapping nav lin
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill(E2E_PASSWORD);
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   try {
     await setLanguage(page, 'en');

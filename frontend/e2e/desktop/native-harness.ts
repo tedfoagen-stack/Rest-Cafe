@@ -402,7 +402,7 @@ export async function createNativeElectronHarness(): Promise<NativeElectronHarne
         if (hasPersistedSession) {
           await nextPage.waitForFunction(() => {
             const path = window.location.pathname.replace(/\/+$/, '') || '/';
-            return path === '/pos' || !localStorage.getItem('token');
+            return path !== '/auth/login' || !localStorage.getItem('token');
           }, { timeout: 30_000 }).catch(() => {});
           currentPath = new URL(nextPage.url()).pathname.replace(/\/+$/, '') || '/';
         }
@@ -411,8 +411,12 @@ export async function createNativeElectronHarness(): Promise<NativeElectronHarne
         await nextPage.locator('#email').fill(env.FLO_E2E_OWNER_EMAIL);
         await nextPage.locator('#password').fill(env.FLO_E2E_OWNER_PASSWORD);
         await nextPage.locator('button[type="submit"]').click();
-        await nextPage.waitForURL((url) => url.pathname.replace(/\/+$/, '') === '/pos', { timeout: 30_000 });
-      } else if (currentPath !== '/pos') {
+        // The owner lands on /dashboard, not /pos: wait only for leaving
+        // the login page, then drive to /pos explicitly below.
+        await nextPage.waitForURL((url) => url.pathname.replace(/\/+$/, '') !== '/auth/login', { timeout: 30_000 });
+        currentPath = new URL(nextPage.url()).pathname.replace(/\/+$/, '') || '/';
+      }
+      if (currentPath !== '/pos') {
         await nextPage.goto(`http://localhost:${ports.main}/pos`, { waitUntil: 'domcontentloaded' });
         await nextPage.waitForURL((url) => url.pathname.replace(/\/+$/, '') === '/pos', { timeout: 30_000 });
       }

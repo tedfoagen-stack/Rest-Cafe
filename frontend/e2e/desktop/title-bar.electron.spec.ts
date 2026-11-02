@@ -63,7 +63,7 @@ test('real preload, renderer, and main boundaries reach an authenticated dashboa
     expect(runtime.focusedAttribute).toBe('true');
   }
   expect(runtime.desktopAttribute).toBe('true');
-  expect(runtime.appInfo).toMatchObject({ name: 'flo-desktop', platform: process.platform });
+  expect(runtime.appInfo).toMatchObject({ name: 'rest-cafe-desktop', platform: process.platform });
   expect(runtime.readiness).toEqual({ success: true });
 });
 

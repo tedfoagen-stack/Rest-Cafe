@@ -1,7 +1,7 @@
 # Rest&Cafe — status pulse
 
-Last pulse: 2026-11-02 19:57 +03 (Asia/Damascus)
-Next pulse: ~20:27 +03 (every 30 minutes, permanently)
+Last pulse: 2026-11-02 20:27 +03 (Asia/Damascus)
+Next pulse: ~20:57 +03 (every 30 minutes, permanently)
 
 ## Current status
 - In hand: none — Assignment 037 COMPLETE. All six audit-fix deliveries (D1 test/CI, D2 hung sale, D3 kitchen tickets, D4 operable host, D5 print correctness, D6 hardening) are on upstream main.
@@ -12,6 +12,7 @@ Next pulse: ~20:27 +03 (every 30 minutes, permanently)
 - Watch (triaged 19:27): GitHub CI FAILED on main 921140c (run 41472936511) — but also failed on the pre-D6 main e0d9961 (run 41457032184) and on the D6 PR branch f94a342 (run 41469407993). Pre-existing, NOT a D6 regression. The failing step is still unidentified (job logs need auth); Ted's battery was 30/30 green on his host.
 
 ## Recent pulses
+- 2026-11-02 20:27 +03 — No change since 19:57: assignment 037 complete, all six deliveries on main; upstream 921140c; no delivery PR open; installer built; CI failure TRIAGED: also failed on pre-D6 main e0d9961 and on the D6 PR branch — pre-existing, not a D6 regression.
 - 2026-11-02 19:57 +03 — No change since 19:27: assignment 037 complete, all six deliveries on main; upstream 921140c; no delivery PR open; installer built; CI failure TRIAGED: also failed on pre-D6 main e0d9961 and on the D6 PR branch — pre-existing, not a D6 regression.
 - 2026-11-02 19:27 +03 — No change since 18:57: assignment 037 complete, all six deliveries on main; upstream 921140c; no delivery PR open; installer built; CI failure TRIAGED: also failed on pre-D6 main e0d9961 and on the D6 PR branch — pre-existing, not a D6 regression.
 - 2026-11-02 18:57 +03 — Delivery 6 LANDED (PR #29 accepted, decision 044, upstream 921140c); thread 037 COMPLETE, all six deliveries on main; installer BUILT successfully (run 41473517475); GitHub CI on 921140c failed — un-triaged, needs a look.

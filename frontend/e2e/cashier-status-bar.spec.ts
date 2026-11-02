@@ -39,7 +39,7 @@ test.describe('Clean Cashier Status Bar & Telemetry Drawer', () => {
     await page.locator('#email').fill('owner@flo.local');
     await page.locator('#password').fill('E2ePass123!');
     await page.locator('button[type="submit"]').click();
-    await page.waitForURL(/\/pos/, { timeout: 20000 });
+    await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
     // 1. Verify persistent frontline status bar is rendered
     const statusBar = page.locator('footer').filter({
@@ -275,7 +275,8 @@ test.describe('Clean Cashier Status Bar & Telemetry Drawer', () => {
     await page.locator('#email').fill('owner@flo.local');
     await page.locator('#password').fill('E2ePass123!');
     await page.locator('button[type="submit"]').click();
-    await page.waitForURL(/\/pos/, { timeout: 20000 });
+    await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
+    await page.goto(`${BASE}/pos`);
 
     const token = await page.evaluate(() => localStorage.getItem('token'));
     expect(token).toBeTruthy();

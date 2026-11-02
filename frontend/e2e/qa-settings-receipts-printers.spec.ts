@@ -36,9 +36,9 @@ async function readSetting(page: Page, key: string): Promise<unknown> {
 
 async function login(page: Page): Promise<void> {
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill('owner@flo.local');
-  await page.getByLabel('Password').fill(E2E_PASSWORD);
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill('owner@flo.local');
+  await page.locator('#password').fill(E2E_PASSWORD);
+  await page.locator('button[type="submit"]').click();
   await page.waitForURL((u) => !u.pathname.includes('/auth/login'), { timeout: 30_000 });
 }
 

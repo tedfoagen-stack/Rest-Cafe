@@ -1624,6 +1624,10 @@ async function main() {
       // `printZReport` so the test never opens a real socket; what we assert
       // is the bytes the route hands to dispatch.
       const thermalModule = require('../main/printers/thermal');
+      // Mock on the defining module, not the thermal barrel: thermal.ts
+      // re-exports printZReport as a getter-only property, so assigning the
+      // mock there silently does nothing and the real socket opens.
+      const docZReportModule = require('../main/printers/document-z-report');
       const origPrintZReport = thermalModule.printZReport;
       const captured: Buffer[] = [];
       const capturedSnapshots: any[] = [];
@@ -1631,7 +1635,7 @@ async function main() {
       // printer is webusb, the helper returns `bytes` already including the
       // forced pulse tail, and the route emits `{ webusb: true, bytes: [...] }`.
       // For the network/usb path the helper returns `ok: true` with bytes.
-      thermalModule.printZReport = async (z: any, _signal?: any, targetPrinter?: any) => {
+      docZReportModule.printZReport = async (z: any, _signal?: any, targetPrinter?: any) => {
         capturedSnapshots.push(z);
         const baseBody = thermalModule.buildZReportBody(z);
         const data = thermalModule.appendCashDrawerPulse(baseBody);
@@ -2000,7 +2004,7 @@ async function main() {
           .send({});
         assertEqual(missing.status, 404, `print: missing Z → 404 (got ${missing.status})`);
       } finally {
-        thermalModule.printZReport = origPrintZReport;
+        docZReportModule.printZReport = origPrintZReport;
       }
     }
 
@@ -2216,9 +2220,12 @@ async function main() {
       // Bytes: print and assert the printed operator block contains 'Owner'
       // (not the raw 'owner-close' id). The thermal body re-encodes text via
       // normalizeThermalText, but the ASCII-named operator renders verbatim.
+      // Mock on the defining module (see section 15): the thermal barrel
+      // re-exports printZReport as a getter-only property.
+      const docZReportModule = require('../main/printers/document-z-report');
       const thermalModule = require('../main/printers/thermal');
       const origPrint = thermalModule.printZReport;
-      thermalModule.printZReport = async (zz: any) => {
+      docZReportModule.printZReport = async (zz: any) => {
         (thermalModule as any).__lastSnapshotForF6 = zz;
         return {
           ok: true,
@@ -2252,7 +2259,7 @@ async function main() {
           `F6 print: built body includes 'Owner' (got ${f6Body.toString('binary').slice(0, 400)})`,
         );
       } finally {
-        thermalModule.printZReport = origPrint;
+        docZReportModule.printZReport = origPrint;
       }
     }
 
@@ -2284,9 +2291,12 @@ async function main() {
         assertEqual(resZ.status, 200, `F5 GET z-report: 200 (got ${resZ.status})`);
         const zId = resZ.body?.zReport?.id;
 
+        // Mock on the defining module (see section 15): the thermal barrel
+        // re-exports printZReport as a getter-only property.
+        const docZReportModule = require('../main/printers/document-z-report');
         const thermalModule = require('../main/printers/thermal');
         const origPrint = thermalModule.printZReport;
-        thermalModule.printZReport = async (zz: any) => {
+        docZReportModule.printZReport = async (zz: any) => {
           (thermalModule as any).__lastSnapshotForF5 = zz;
           return {
             ok: true,
@@ -2345,7 +2355,7 @@ async function main() {
             ).run(now());
           }
         } finally {
-          thermalModule.printZReport = origPrint;
+          docZReportModule.printZReport = origPrint;
         }
       } finally {
         db.prepare(`DELETE FROM settings WHERE key='country'`).run();
@@ -2618,6 +2628,9 @@ async function main() {
 
       // (c) 502: dispatch failure surfaces the underlying detail. Mock the
       // helper to return ok:false with a distinguishable detail string.
+      // Mock on the defining module (see section 15): the thermal barrel
+      // re-exports printZReport as a getter-only property.
+      const docZReportModule = require('../main/printers/document-z-report');
       const origPrintZReport = thermalModule.printZReport;
       const networkPrinter2 = {
         id: 'net-502',
@@ -2640,7 +2653,10 @@ async function main() {
         now(),
         now(),
       );
-      thermalModule.printZReport = async () => ({ ok: false, detail: 'connection refused (test)' });
+      docZReportModule.printZReport = async () => ({
+        ok: false,
+        detail: 'connection refused (test)',
+      });
       try {
         const fail = await request(app)
           .post(`/api/cash-closures/${z.id}/print`)
@@ -2653,7 +2669,7 @@ async function main() {
           `F4 502: response carries underlying detail (got ${JSON.stringify(fail.body)})`,
         );
       } finally {
-        thermalModule.printZReport = origPrintZReport;
+        docZReportModule.printZReport = origPrintZReport;
       }
     }
 

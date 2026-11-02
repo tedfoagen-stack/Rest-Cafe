@@ -3,9 +3,9 @@ import { E2E_BASE_URL as BASE } from './helpers/urls';
 
 test('KDS sidebar link selects the KDS tab after switching Settings tabs', async ({ page }) => {
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill('manager@flo.local');
-  await page.getByLabel('Password').fill('E2ePass123!');
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill('manager@flo.local');
+  await page.locator('#password').fill('E2ePass123!');
+  await page.locator('button[type="submit"]').click();
 
   await page.getByRole('link', { name: 'Settings', exact: true }).click();
   await expect(page).toHaveURL(/\/settings\/?$/);

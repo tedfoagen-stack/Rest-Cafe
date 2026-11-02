@@ -97,9 +97,9 @@ test('live validation: floorplan View Order navigation and OrdersPage ?table= qu
     order102 = await createOrderForTable(t102.id);
 
     await page.goto(`${BASE}/auth/login`);
-    await page.getByLabel('Email').fill(EMAIL);
-    await page.getByLabel('Password').fill(PASSWORD);
-    await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.locator('#email').fill(EMAIL);
+    await page.locator('#password').fill(PASSWORD);
+    await page.locator('button[type="submit"]').click();
     await page.waitForURL((url) => !url.pathname.includes('/auth/login'), { timeout: 15_000 });
 
     const getTableFilterSelect = () =>

@@ -38,7 +38,7 @@ test('browser/LAN has zero title-bar markup and unchanged layout at md+ viewport
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   for (const viewport of VIEWPORTS) {
     await page.setViewportSize({ width: viewport.width, height: viewport.height });
@@ -87,7 +87,7 @@ test('sidebar offset regression (#504): expanded/collapsed states at md+ viewpor
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const assertViewportTopGeometry = async (label: string, viewportHeight: number) => {
     const sidebar = page.locator('[data-slot="sidebar-container"]');
@@ -198,7 +198,7 @@ test('sidebar renders profile dropup trigger and supports drag rail resizing', a
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   // Sidebar footer profile dropup trigger renders (the footer also has a
   // quick theme-toggle button, so scope to the dropdown trigger specifically).
@@ -269,7 +269,7 @@ test('browser Electron fixture drives authenticated title-bar and fallback contr
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
   await expect(page.locator('[data-slot="sidebar-container"]')).toBeVisible();
   await expect(page.getByTestId('desktop-title-bar')).toBeVisible();
   await expect(page.locator('.flo-title-bar__fallback-controls')).toBeVisible();
@@ -288,7 +288,7 @@ test('browser Electron fixture restores the Windows title-bar application menu',
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const menu = page.getByTestId('desktop-application-menu');
   await expect(menu).toBeVisible();
@@ -357,7 +357,7 @@ test('Windows title-bar menu never overlaps the identity from the minimum window
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const menu = page.getByTestId('desktop-application-menu');
   const identity = page.locator('.flo-title-bar__identity');
@@ -435,7 +435,7 @@ test('macOS keeps the native application menu and renders no title-bar menu row'
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   await expect(page.getByTestId('desktop-title-bar')).toBeVisible();
   await expect(page.getByTestId('desktop-application-menu')).toHaveCount(0);
@@ -454,7 +454,7 @@ test('macOS native fullscreen removes traffic-light inset and restores on exit (
   await page.locator('#email').fill('owner@flo.local');
   await page.locator('#password').fill('E2ePass123!');
   await page.locator('button[type="submit"]').click();
-  await page.waitForURL(/\/pos/, { timeout: 20000 });
+  await page.waitForURL((url) => !url.pathname.startsWith('/auth/login'), { timeout: 20000 });
 
   const titleBar = page.getByTestId('desktop-title-bar');
   await expect(titleBar).toBeVisible();

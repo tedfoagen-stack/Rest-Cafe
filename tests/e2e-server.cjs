@@ -31,7 +31,6 @@ process.env.FLO_AUTH_RATE_LIMIT_MAX = '1000';
 // here 429s the suite's own page loads instead of rate-limiting an abusive caller.
 process.env.FLO_SETTINGS_READ_RATE_LIMIT_MAX = '100000';
 process.env.FLO_SETTINGS_WRITE_RATE_LIMIT_MAX = '1000';
-process.env.FLO_WHATSAPP_SOCKET_DISABLED = '1';
 process.env.FLO_MATRIX_OFFLINE = '1';
 process.env.NODE_ENV = 'test';
 
@@ -60,10 +59,6 @@ const {
 } = require('../dist/main/shutdown');
 const { startServer, stopServer, getServerPort } = require('../dist/main/server');
 const { startServerApp, stopServerApp, getServerAppPort } = require('../dist/main/server-app');
-const {
-  shutdown: shutdownWhatsApp,
-  requestShutdown: requestWhatsAppShutdown,
-} = require('../dist/main/services/whatsapp');
 const { startStandaloneServers } = require('../dist/main/standalone-startup');
 const flatRatePackData = require('./fixtures/synthetic-flat-rate-pack.json');
 const officialIndiaPackData = require('./fixtures/legacy-tax-packs/official-india.json');
@@ -223,8 +218,8 @@ function seedPosFixture() {
     ['billing_type', 'prepaid'],
     ['business_type', 'restaurant'],
     ['tables_required', 'false'],
-    // Stays enabled because the blocklist UI is gated on it. The live session is
-    // suppressed separately via FLO_WHATSAPP_SOCKET_DISABLED.
+    // Stays enabled because the blocklist UI is gated on it. The WhatsApp
+    // service module was removed, so no live session exists to suppress.
     ['whatsapp_enabled', 'true'],
     // Tax defaults off (migration 40) until explicitly enabled — this fixture's
     // product carries a real tax_category_id expecting real tax, so it must
@@ -305,14 +300,6 @@ const requestStop = createExitCodeAwareShutdown(
       if (isShutdownTimeout(error)) throw error;
     }
     try {
-      await shutdownWhatsApp();
-    } catch (error) {
-      cleanupFailed = true;
-      databaseBlocked = true;
-      console.error('[E2E] WhatsApp cleanup failed:', error);
-      if (isShutdownTimeout(error)) throw error;
-    }
-    try {
       await waitForHttpShutdownWork();
     } catch (error) {
       cleanupFailed = true;
@@ -347,7 +334,6 @@ const requestStop = createExitCodeAwareShutdown(
     return cleanupFailed ? 1 : 0;
   },
   {
-    onShutdownRequested: requestWhatsAppShutdown,
     onFatalTimeout: () => process.exit(1),
   },
 );

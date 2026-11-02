@@ -33,9 +33,9 @@ test.describe('product cost price round trip', () => {
     productId = (await createResponse.json()).product.id as string;
 
     await page.goto(`${BASE}/auth/login`);
-    await page.getByLabel('Email').fill('owner@flo.local');
-    await page.getByLabel('Password').fill(E2E_PASSWORD);
-    await page.getByRole('button', { name: 'Sign In' }).click();
+    await page.locator('#email').fill('owner@flo.local');
+    await page.locator('#password').fill(E2E_PASSWORD);
+    await page.locator('button[type="submit"]').click();
     await page.waitForURL(/\/(pos|orders)/, { timeout: 20000 });
     await page.goto(`${BASE}/products`);
 

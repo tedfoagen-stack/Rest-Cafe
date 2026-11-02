@@ -1,9 +1,17 @@
 name: CI
 
-# Lean validation for the Rest&Cafe fork: lint, builds, and the focused
-# suites that pin the local-only contract. Upstream's full gate matrix
+# Validation for the Rest&Cafe fork: lint, builds, the protecting suites
+# (money, backup, migration, upgrade, startup, full-house, day-cycle,
+# receipt oracle), and the Playwright tiers. Upstream's full gate matrix
 # (cross-platform release checks, review bots, private specs) does not
 # apply to this fork's manual distribution model.
+#
+# The Playwright job is non-gating (continue-on-error): the browser tiers
+# carry known test-side failures — the e2e specs were written against an
+# English UI and the app is Arabic-first, so many specs fail on stale
+# English selectors (see the Delivery 1 status file, thread 20261102-037,
+# for the failure inventory). The job runs so those failures stay visible;
+# Ted routes them separately. Tier 1 and the Electron tier are green.
 
 on:
   push:
@@ -20,9 +28,9 @@ concurrency:
 
 jobs:
   validate:
-    name: Lint, build, focused tests
+    name: Lint, build, protecting tests
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
 
@@ -42,7 +50,7 @@ jobs:
           npm run build
           npm run build:frontend
 
-      - name: Focused suites (local-only contract)
+      - name: Protecting suites (local-only contract, money, backup, migration, upgrade, startup, oracle)
         run: |
           npm run test:url-allowlist
           npm run test:offline-mode
@@ -51,3 +59,63 @@ jobs:
           npm run test:electron-api-contract
           npm run test:print-parity
           npm run test:script-coverage
+          npm run test:run-test-wrapper
+          npm run test:smoke
+          npm run test:startup-cache
+          npm run test:shutdown-lifecycle
+          npm run test:full-house
+          npm run test:restaurant-day-cycle
+          npm run test:refunds
+          npm run test:tax-engine
+          npm run test:charges
+          npm run test:currency
+          npm run test:cash-closures
+          npm run test:cash-sessions
+          npm run test:reports-reconciliation
+          npm run test:order-totals-recompute
+          npm run test:receipt-column-oracle
+          npm run test:receipt-column-width
+          npm run test:backup
+          npm run test:local-backup
+          npm run test:migration-registry
+          npm run test:upgrade-path
+          npm run test:migration-v56-v57
+          npm run test:migration-v71-repair
+          npm run test:migration-v80-cash-drawer-pulse
+          npm run test:migration-v81-cash-closures
+
+  playwright:
+    name: Playwright tiers (non-gating, see header)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install browser and display dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          cd frontend && npx playwright install --with-deps chromium
+
+      - name: Build backend and frontend
+        run: |
+          npm run build
+          npm run build:frontend
+
+      - name: Tier 1 (kitchen delivery-before-billing gate)
+        run: npm run test:e2e:browser:tier1
+
+      - name: Tier 2 (ops-admin, settings, print-test page)
+        run: npm run test:e2e:browser:tier2
+
+      - name: Electron tier (real Electron, headless via xvfb)
+        run: xvfb-run -a npm run test:e2e:electron

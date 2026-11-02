@@ -6,12 +6,13 @@ const fs = require('node:fs');
 const path = require('node:path');
 
 const TEST_EXCLUSIONS = {
-  'test:e2e:server': 'Long-running server process used by the dedicated Playwright jobs.',
-  'test:e2e:browser': 'Runs in the dedicated browser Playwright CI job.',
-  'test:e2e:browser:tier1': 'Runs in the dedicated verified headless Playwright CI tier.',
-  'test:e2e:browser:tier2': 'Runs in the dedicated verified headless Playwright CI tier.',
-  'test:e2e:electron': 'Runs in the dedicated native Electron Playwright CI job.',
-  'test:e2e': 'Alias for the dedicated browser Playwright job.',
+  'test:e2e:server': 'Long-running server process started by the Playwright jobs.',
+  'test:e2e:browser':
+    'Full 325-test browser run, a local diagnostic only — the CI Playwright job runs the tier1/tier2/electron tiers, not this script.',
+  'test:e2e:browser:tier1': 'Runs in the Playwright CI job (tier 1 step).',
+  'test:e2e:browser:tier2': 'Runs in the Playwright CI job (tier 2 step).',
+  'test:e2e:electron': 'Runs in the Playwright CI job (Electron step, xvfb).',
+  'test:e2e': 'Alias for the default browser run (local diagnostic only).',
   'test:upgrade-regression': 'Alias of test:upgrade-path, which is in the default suite.',
   'test:currency-split': 'Subset alias already executed by test:currency in the default suite.',
 };

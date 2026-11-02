@@ -24,9 +24,9 @@ test('menu modal suspends barcode scans and browser fallback includes selected d
   });
   await page.route('**/api/printers/print-menu', (route) => route.fulfill({ status: 502, json: { error: 'Printer offline' } }));
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill('owner@flo.local');
-  await page.getByLabel('Password').fill(E2E_PASSWORD);
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill('owner@flo.local');
+  await page.locator('#password').fill(E2E_PASSWORD);
+  await page.locator('button[type="submit"]').click();
   await page.waitForURL(/\/(pos|orders)/);
   await expect.poll(() => page.evaluate(() => localStorage.getItem('token'))).not.toBeNull();
   await page.goto(`${BASE}/pos`);
@@ -78,9 +78,9 @@ test('print menu offers receipt, paper, and PDF destinations', async ({ page, co
   expect(printerResponse.status()).toBe(201);
   const printer = (await printerResponse.json()).printer as { id: string; name: string };
   await page.goto(`${BASE}/auth/login`);
-  await page.getByLabel('Email').fill('owner@flo.local');
-  await page.getByLabel('Password').fill(E2E_PASSWORD);
-  await page.getByRole('button', { name: 'Sign In' }).click();
+  await page.locator('#email').fill('owner@flo.local');
+  await page.locator('#password').fill(E2E_PASSWORD);
+  await page.locator('button[type="submit"]').click();
   await page.waitForURL(/\/(pos|orders)/);
   await expect.poll(() => page.evaluate(() => localStorage.getItem('token'))).not.toBeNull();
   await page.goto(`${BASE}/pos`);

@@ -1,6 +1,6 @@
 # Rest&Cafe — status pulse
-Last pulse: 2026-11-03 08:57 +03 (Asia/Damascus)
-Next pulse: ~09:27 +03 (every 30 minutes, permanently)
+Last pulse: 2026-11-03 09:27 +03 (Asia/Damascus)
+Next pulse: ~09:57 +03 (every 30 minutes, permanently)
 
 ## Current status
 - In hand: none — Assignment 037 COMPLETE. All six audit-fix deliveries (D1 test/CI, D2 hung sale, D3 kitchen tickets, D4 operable host, D5 print correctness, D6 hardening) are on upstream main.
@@ -11,6 +11,7 @@ Next pulse: ~09:27 +03 (every 30 minutes, permanently)
 - Watch (follow-up 39): CLOSED — CI run 41503698213 on head 6f873f1 completed SUCCESS at 21:46:18 +03 (the intermediate run on 5cdd4f2 was cancelled, superseded by the follow-up 39 commit 14s later). The CI-gate cause (five missing environment skips in scripts/run-test.cjs) is fixed and verified green; installer 41473517475 on 921140c unaffected.
 
 ## Recent pulses
+- 2026-11-03 09:27 +03 — No change since 08:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 08:57 +03 — No change since 08:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 08:27 +03 — No change since 07:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 07:57 +03 — No change since 07:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
@@ -20,4 +21,3 @@ Next pulse: ~09:27 +03 (every 30 minutes, permanently)
 - 2026-11-03 05:57 +03 — No change since 05:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 05:27 +03 — No change since 04:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 04:57 +03 — No change since 04:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
-- 2026-11-03 04:27 +03 — No change since 03:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.

@@ -1,6 +1,7 @@
 # Rest&Cafe — status pulse
+Status: PAUSED by owner 2026-11-04 00:38 +03 — pulses resume only while work is in hand (Ali's order: no pulses unless a delivery is in progress).
 Last pulse: 2026-11-04 00:27 +03 (Asia/Damascus)
-Next pulse: ~00:57 +03 (every 30 minutes, permanently)
+Next pulse: only when work is in hand
 
 ## Current status
 - In hand: none — Assignment 037 COMPLETE. All six audit-fix deliveries (D1 test/CI, D2 hung sale, D3 kitchen tickets, D4 operable host, D5 print correctness, D6 hardening) are on upstream main.

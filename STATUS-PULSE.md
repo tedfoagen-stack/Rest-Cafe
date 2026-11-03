@@ -1,16 +1,17 @@
 # Rest&Cafe — status pulse
-Last pulse: 2026-11-03 12:27 +03 (Asia/Damascus)
-Next pulse: ~12:57 +03 (every 30 minutes, permanently)
+Last pulse: 2026-11-03 12:57 +03 (Asia/Damascus)
+Next pulse: ~13:27 +03 (every 30 minutes, permanently)
 
 ## Current status
 - In hand: none — Assignment 037 COMPLETE. All six audit-fix deliveries (D1 test/CI, D2 hung sale, D3 kitchen tickets, D4 operable host, D5 print correctness, D6 hardening) are on upstream main.
 - LANDED: Delivery 6 accepted (decision 044, upstream 921140c) — PR #29 closed unmerged per protocol; Ted's battery 30/30 green on his host; follow-up 38 recorded. Thread 037 CLOSED.
 - Open PRs: none from Flint — only dependabot #1/#2 (pre-existing).
-- Upstream main: 6c412f9 (moved 6f873f1 → 6c412f9 at ~02:03 +03: one commit by Ted — follow-up 40, commercial documentation & marketing package in deliverables/ (user guide, brochures, QA_Report.md, Feature_Verification_Matrix.md, screenshots, assets). Zero product code change; no new agent-comms file, no new assignment.)
+- Upstream main: 22089ba (moved 6c412f9 → 22089ba at 12:44 +03: one commit by Ted — follow-up 41, docs(deliverables) owner corrections: neutral demo names + one-pager layout fix in deliverables/ and docs/IMPLEMENTATION_REPORT_AR.md. Zero product code change; no new agent-comms file, no new assignment.)
 - Installer: BUILT — "Build Windows Installer" run 41473517475 completed SUCCESS at 18:38 +03 from main 921140c. Physical-printer verification and real Windows-login autostart test on the owner's machine remain outstanding.
 - Watch (follow-up 39): CLOSED — CI run 41503698213 on head 6f873f1 completed SUCCESS at 21:46:18 +03 (the intermediate run on 5cdd4f2 was cancelled, superseded by the follow-up 39 commit 14s later). The CI-gate cause (five missing environment skips in scripts/run-test.cjs) is fixed and verified green; installer 41473517475 on 921140c unaffected.
 
 ## Recent pulses
+- 2026-11-03 12:57 +03 — Upstream moved since 12:27: one commit by Ted (follow-up 41, 22089ba, 12:44 +03) — docs/deliverables owner corrections, neutral demo names + one-pager layout fix; no code change, no new assignment. Assignment 037 complete, all six deliveries on main; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 12:27 +03 — No change since 11:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 11:57 +03 — No change since 11:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 11:27 +03 — No change since 10:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
@@ -20,4 +21,3 @@ Next pulse: ~12:57 +03 (every 30 minutes, permanently)
 - 2026-11-03 09:27 +03 — No change since 08:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 08:57 +03 — No change since 08:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 08:27 +03 — No change since 07:57: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
-- 2026-11-03 07:57 +03 — No change since 07:27: assignment 037 complete, all six deliveries on main; upstream 6c412f9; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.

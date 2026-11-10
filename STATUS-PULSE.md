@@ -1,17 +1,18 @@
 # Rest&Cafe — status pulse
-Status: PAUSED by owner 2026-11-04 00:38 +03 — pulses resume only while work is in hand (Ali's order: no pulses unless a delivery is in progress).
-Last pulse: 2026-11-04 00:27 +03 (Asia/Damascus)
-Next pulse: only when work is in hand
+Status: ACTIVE — work in hand (assignment 050, Phase B delivery B1). Pulses go out only while work is in hand (Ali's order 2026-11-04 00:38).
+Last pulse: 2026-11-10 15:27 +03 (Asia/Damascus)
+Next pulse: ~2026-11-10 15:57 +03
 
 ## Current status
-- In hand: none — Assignment 037 COMPLETE. All six audit-fix deliveries (D1 test/CI, D2 hung sale, D3 kitchen tickets, D4 operable host, D5 print correctness, D6 hardening) are on upstream main.
-- LANDED: Delivery 6 accepted (decision 044, upstream 921140c) — PR #29 closed unmerged per protocol; Ted's battery 30/30 green on his host; follow-up 38 recorded. Thread 037 CLOSED.
-- Open PRs: none from Flint — only dependabot #1/#2 (pre-existing).
-- Upstream main: 22089ba (moved 6c412f9 → 22089ba at 12:44 +03: one commit by Ted — follow-up 41, docs/deliverables owner corrections: neutral demo names + one-pager layout fix in deliverables/ and docs/IMPLEMENTATION_REPORT_AR.md. Zero production code change; no new agent-comms file, no new assignment.)
-- Installer: BUILT — "Build Windows Installer" run 41473517475 completed SUCCESS at 18:38 +03 from main 921140c. Physical-printer verification and real Windows-login autostart test on the owner's machine remain outstanding.
-- Watch (follow-up 39): CLOSED — CI run 41503698213 on head 6f873f1 completed SUCCESS at 21:46:18 +03 (the intermediate run on 5cdd4f2 was cancelled, superseded by the follow-up 39 commit 14s later). The CI-gate cause (five missing environment skips in scripts/run-test.cjs) is fixed and verified green; installer 41473517475 on 921140c unaffected.
+- In hand: Phase B Delivery 1 (B1) — PF-01 generic-raster validated opt-in; branch assistant/printing-finalization-b1, started 2026-11-10 15:23 +03; announce pushed (fork head 278a1b9), start ping sent; implementation in progress in a live session.
+- LANDED: Phase A accepted (decision 051, upstream 7658e76) — PR #30 landed as b9d4e12 (announce) + 6f69757 (report) + 2dde2cd (landing/index, follow-up 50). Ted's spot battery matched the report (oracle 13/13, bills-print-api 34/34, migration-registry 386/386).
+- Open PRs: none from Flint — only dependabot #1/#2 (pre-existing). B1 PR not yet open (work started ~4 min ago).
+- Upstream main: 7658e76 (unchanged since the Phase A landing).
+- Installer: still the 921140c build; a fresh installer is dispatched by Ted after the last production delivery (B4).
+- Block: none.
 
 ## Recent pulses
+- 2026-11-10 15:27 +03 — B1 in hand since 15:23 (PF-01, branch assistant/printing-finalization-b1); Phase A landed (decision 051, upstream 7658e76); no delivery PR open yet; no block.
 - 2026-11-04 00:27 +03 — No change since 23:57: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 23:57 +03 — No change since 23:27: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 23:27 +03 — No change since 22:57: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
@@ -21,4 +22,3 @@ Next pulse: only when work is in hand
 - 2026-11-03 21:27 +03 — No change since 20:57: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 20:57 +03 — No change since 20:27: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
 - 2026-11-03 20:27 +03 — No change since 19:57: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
-- 2026-11-03 19:57 +03 — No change since 19:27: assignment 037 complete, all six deliveries on main; upstream 22089ba; no delivery PR open; installer built; follow-up 39 CLOSED — CI green on 6f873f1.
